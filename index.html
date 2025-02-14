@@ -42,8 +42,8 @@
         }
 
         function isInsideHeart(x, y, width, height) {
-            const scaledX = (x - width / 2) / 300;  
-            const scaledY = (height / 2 - y) / 300; 
+            const scaledX = (x - width / 2) / 300;
+            const scaledY = (height / 2 - y) / 300;
             const equation = Math.pow(scaledX ** 2 + scaledY ** 2 - 1, 3) - scaledX ** 2 * Math.pow(scaledY, 3);
             return equation <= 0;
         }
@@ -53,7 +53,7 @@
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        particlesNumber = 500;
+        particlesNumber = 1000;
         maxParticles = 50_000;
 
         const particles = [];
@@ -64,8 +64,8 @@
                 y: Math.random() * canvas.height,
                 radius: Math.random() * 3,
                 color: getRandomColor(),
-                speedX: (Math.random() - 0.5) * 2, 
-                speedY: (Math.random() - 0.5) * 2 
+                speedX: (Math.random() - 0.5) * 2,
+                speedY: (Math.random() - 0.5) * 2
             };
         }
 
@@ -73,17 +73,17 @@
             let particle;
             do {
                 particle = createParticle();
-            } while (!isInsideHeart(particle.x, particle.y, canvas.width, canvas.height - (canvas.height/3)));
+            } while (!isInsideHeart(particle.x, particle.y, canvas.width, canvas.height - (canvas.height / 3)));
             particles.push(particle);
         }
 
         function updateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(particle => {
                 particle.x += particle.speedX;
                 particle.y += particle.speedY;
 
-                if (!isInsideHeart(particle.x, particle.y, canvas.width, canvas.height - (canvas.height/3))) {
+                if (!isInsideHeart(particle.x, particle.y, canvas.width, canvas.height - (canvas.height / 3))) {
                     particle.speedX *= -1;
                     particle.speedY *= -1;
                     particle.x += particle.speedX;
@@ -99,19 +99,19 @@
 
         function animate() {
             updateParticles();
-            requestAnimationFrame(animate); 
+            requestAnimationFrame(animate);
         }
 
-        animate(); 
+        animate();
 
         canvas.addEventListener('click', (event) => {
-            if(particles.length > maxParticles) {
+            if (particles.length > maxParticles) {
                 return;
             }
             const rect = canvas.getBoundingClientRect(); // Get canvas position
             const clickX = event.clientX - rect.left; // X coordinate of the click
             const clickY = event.clientY - rect.top; // Y coordinate of the click
-            const newParticlesCount = Math.floor(Math.random() * (100 - 50 + 1)) + 50; 
+            const newParticlesCount = Math.floor(Math.random() * (200 - 100 + 1)) + 100;
 
             for (let i = 0; i < newParticlesCount; i++) {
                 let particle = {
@@ -131,4 +131,5 @@
         });
     </script>
 </body>
+
 </html>
