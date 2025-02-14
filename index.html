@@ -73,7 +73,7 @@
             let particle;
             do {
                 particle = createParticle();
-            } while (!isInsideHeart(particle.x, particle.y, canvas.width, canvas.height - 500));
+            } while (!isInsideHeart(particle.x, particle.y, canvas.width, canvas.height - (canvas.height/3)));
             particles.push(particle);
         }
 
@@ -83,7 +83,7 @@
                 particle.x += particle.speedX;
                 particle.y += particle.speedY;
 
-                if (!isInsideHeart(particle.x, particle.y, canvas.width, canvas.height - 500)) {
+                if (!isInsideHeart(particle.x, particle.y, canvas.width, canvas.height - (canvas.height/3))) {
                     particle.speedX *= -1;
                     particle.speedY *= -1;
                     particle.x += particle.speedX;
